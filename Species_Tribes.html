@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <meta charset="UTF-8">
+
+        <title>Acer saccharinum</title>
+
+
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+        integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+        crossorigin=""/>
+
+        <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+        integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+        crossorigin=""></script>
+
+        <!-- replace with another icon for page -->
+        <!-- <link rel="icon" href="mask.png" >  -->
+
+        <style type="text/css">
+          html, body { margin: 0; padding: 0; height: 100%; }
+          #map { min-height: 90%; }
+        </style>
+
+        <script type="text/javascript" src="Species_by_County.js"></script>
+        <script type="text/javascript" src="Tribes.js"></script>
+
+          <link href='https://fonts.googleapis.com/css?family=Alef' rel='stylesheet'>
+
+        <style>
+          /* Optional: adjust the values below to change the appearance of the legend */
+          .legend {
+              padding: 10px 12px;
+              line-height: 34px;
+              background: rgba(152, 155, 150,0.9);
+              box-shadow: 0 0 15px rgba(0,0,0,0.2);
+              border-radius: 9px;
+          }
+
+           /* Optional: adjust the values below to change the appearance of the legend color boxes */
+           .legend i {
+              width: 30px;
+              height: 30px;
+              float: left;
+              margin-right: 10px;
+              opacity: 0.7;
+          }
+
+
+          .title {
+            padding: 6px 8px;
+            font-family: 'Alef';font-size: 13px;
+            background: grey;
+            background: rgba(152,155,150,0.8);
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+            border-radius: 5px;
+        }
+
+        </style>
+
+    </head>
+
+    <body>
+        <div id="map" style="height: 500px"></div>
+
+        <script type="text/javascript">
+
+          var map = L.map('map', {
+              center: [39.8,-88],
+              zoom: 7
+          });
+// basemap
+        var antique = L.tileLayer('https://cartocdn_{s}.global.ssl.fastly.net/base-antique/{z}/{x}/{y}.png', {
+           attribution: 'Map tiles by Carto, under CC BY 3.0. Data by OpenStreetMap, under ODbL.',
+           maxZoom: 11,
+           minZoom: 3
+         }).addTo(map);
+
+         // var watercolor = L.tileLayer('http://tile.stamen.com/watercolor/{z}/{x}/{y}.png', {
+         //     attribution: 'Map tiles by Stamen Design, under CC BY 3.0. Data by OpenStreetMap, under ODbL.',
+         //     maxZoom: 11,
+         //     minZoom: 3
+         // }).addTo(map);
+
+
+
+
+             function getColor(value) {
+                 return value > 0 ? '#40a00c':
+                                    '#e4fcd7';
+             }
+
+             function style_aceneg(feature){
+                 return {
+                     fillColor: getColor(feature.properties.aceneg),
+                     weight: 2,
+                     opacity: 1,
+                     color: 'darkgray',
+                     fillOpacity: 1,
+                   };
+                }
+
+                          function style_acesai(feature){
+                              return {
+                                  fillColor: getColor(feature.properties.acesai),
+                                  weight: 2,
+                                  opacity: 1,
+                                  color: 'darkgray',
+
+                                  fillOpacity: 1,
+                                };
+                             }
+
+                                    function style_ascsyr(feature){
+                                        return {
+                                            fillColor: getColor(feature.properties.ascsyr),
+                                            weight: 2,
+                                            opacity: 1,
+                                            color: 'darkgray',
+                                            fillOpacity: 1,
+                                          };
+                                       }
+
+                                                 function style_cicmac(feature){
+                                                     return {
+                                                         fillColor: getColor(feature.properties.cicmac),
+                                                         weight: 2,
+                                                         opacity: 1,
+                                                         color: 'darkgray',
+                                                         fillOpacity: 1,
+                                                       };
+                                                    }
+
+                                                              function style_germac(feature){
+                                                                  return {
+                                                                      fillColor: getColor(feature.properties.germac),
+                                                                      weight: 2,
+                                                                      opacity: 1,
+                                                                      color: 'darkgray',
+                                                                      fillOpacity: 1,
+                                                                    };
+                                                                 }
+
+                                                       function style_hypper_NNa(feature){
+                                                           return {
+                                                               fillColor: getColor(feature.properties.hypper_NNa),
+                                                               weight: 2,
+                                                               opacity: 1,
+                                                               color: 'darkgray',
+                                                               fillOpacity: 1,
+                                                             };
+                                                          }
+
+                                                  function style_monfis(feature){
+                                                      return {
+                                                          fillColor: getColor(feature.properties.monfis),
+                                                          weight: 2,
+                                                          opacity: 1,
+                                                          color: 'darkgray',
+                                                          fillOpacity: 1,
+                                                        };
+                                                     }
+
+                                           function style_nepcat_NNa(feature){
+                                               return {
+                                                   fillColor: getColor(feature.properties.nepcat_NNa),
+                                                   weight: 2,
+                                                   opacity: 1,
+                                                   color: 'darkgray',
+                                                   fillOpacity: 1,
+                                                 };
+                                              }
+
+                                    function style_podpel(feature){
+                                        return {
+                                            fillColor: getColor(feature.properties.podpel),
+                                            weight: 2,
+                                            opacity: 1,
+                                            color: 'darkgray',
+                                            fillOpacity: 1,
+                                          };
+                                       }
+
+                     function style_popdel(feature){
+                         return {
+                             fillColor: getColor(feature.properties.popdel),
+                             weight: 2,
+                             opacity: 1,
+                             color: 'darkgray',
+                             fillOpacity: 1,
+                           };
+                        }
+
+
+
+            function TribeColors(value) {
+                return value > 98 ? '#1b9e77':
+                        value > 53 ? '#d95f02':
+                        value > 35 ? '#7570b3':
+                        value > 34 ? '#e7298a':
+                        value > 33 ? '#66a61e':
+                        value > 31 ? '#e6ab02':
+                        value > 13 ? '#a6761d':
+                                     '#e4fcd7';
+            }
+
+            function style_Tribes(feature){
+                return {
+                    fillColor: TribeColors(feature.properties.ID),
+                    weight: 2,
+                    opacity: 1,
+                    color: 'darkgray',
+                    fillOpacity: .4,
+                  };
+               }
+
+
+    aceneg = L.geoJson(Species_by_County,{
+          style:style_aceneg,
+          // onEachFeature: onEachFeature
+        }).bindTooltip(function (layer){
+          return layer.feature.properties.NAME + ' County'
+          }).addTo(map);
+
+        acesai = L.geoJson(Species_by_County,{
+        style:style_acesai,
+        // onEachFeature: onEachFeature
+        }).bindTooltip(function (layer){
+        return layer.feature.properties.NAME + ' County'
+        }).addTo(map);
+
+        ascsyr = L.geoJson(Species_by_County,{
+        style:style_ascsyr,
+        // onEachFeature: onEachFeature
+        }).bindTooltip(function (layer){
+        return layer.feature.properties.NAME + ' County'
+        }).addTo(map);
+
+        cicmac = L.geoJson(Species_by_County,{
+        style:style_cicmac,
+        // onEachFeature: onEachFeature
+        }).bindTooltip(function (layer){
+        return layer.feature.properties.NAME + ' County'
+        }).addTo(map);
+
+        germac = L.geoJson(Species_by_County,{
+        style:style_germac,
+        // onEachFeature: onEachFeature
+        }).bindTooltip(function (layer){
+        return layer.feature.properties.NAME + ' County'
+        }).addTo(map);
+
+        hypper_NNa = L.geoJson(Species_by_County,{
+        style:style_hypper_NNa,
+        // onEachFeature: onEachFeature
+        }).bindTooltip(function (layer){
+        return layer.feature.properties.NAME + ' County'
+        }).addTo(map);
+
+        monfis = L.geoJson(Species_by_County,{
+        style:style_monfis,
+        // onEachFeature: onEachFeature
+        }).bindTooltip(function (layer){
+        return layer.feature.properties.NAME + ' County'
+        }).addTo(map);
+
+        nepcat_NNa = L.geoJson(Species_by_County,{
+        style:style_nepcat_NNa,
+        // onEachFeature: onEachFeature
+        }).bindTooltip(function (layer){
+        return layer.feature.properties.NAME + ' County'
+        }).addTo(map);
+
+        podpel = L.geoJson(Species_by_County,{
+        style:style_podpel,
+        // onEachFeature: onEachFeature
+        }).bindTooltip(function (layer){
+        return layer.feature.properties.NAME + ' County'
+        }).addTo(map);
+
+        popdel = L.geoJson(Species_by_County,{
+        style:style_popdel,
+        // onEachFeature: onEachFeature
+        }).bindTooltip(function (layer){
+        return layer.feature.properties.NAME + ' County'
+        }).addTo(map);
+
+
+Tribes = L.geoJson(Tribes,{
+    style:style_Tribes,
+    // onEachFeature: onEachFeature
+  }).bindTooltip(function (layer){
+    return layer.feature.properties.Name
+    }).addTo(map);
+
+
+
+    var legend = L.control({position: 'bottomright'});
+    legend.onAdd = function (map) {
+
+    var div = L.DomUtil.create('div', 'legend');
+    div.innerHTML = '<strong>Categories</strong><br>';
+    var categories = ['Present','Not Present'];
+    var yesno = [1,0];
+
+    for (var i = 0; i < categories.length; i++) {
+
+            div.innerHTML +=
+
+                '<i class="square" style="background:' + getColor(yesno[i]) + '"></i> ' +
+            categories[i] + '<br>';
+
+        }
+
+    return div;
+    };
+    legend.addTo(map);
+
+
+    var title = L.control({position: 'topright'}); // position of the title
+
+         title.onAdd = function (map) {
+             this._div = L.DomUtil.create('div', 'title'); // create a div with a class "title"
+             this._div.innerHTML = "<h3>Range of medicinal plants, by county <br> & Tribal Ranges, Illinois</h3>";  // Title text, may use html to customize
+             return this._div;
+         };
+
+          title.addTo(map);
+
+
+              var basemaps = {
+              // "Terrain Raster": terrain2,
+              // "Antique Canvas": antique,
+              // "Watercolor Canvas": watercolor,
+              "<i>Acer negundo - Boxelder</i>": aceneg,
+              "<i>Acer saccharinum - Silver Maple</i>": acesai,
+              "<i>Asclepias syriaca - Common Milkweed</i>": ascsyr,
+              "<i>Cicuta maculata - Water Hemlock</i>": cicmac,
+              "<i>Geranium maculatum - Wild Geranium</i>": germac,
+              "<i>*Hypericum perforatum - St John's Wort</i>": hypper_NNa,
+              "<i>Monarda fistulosa - Wild Bergamot</i>": monfis,
+              "<i>*Nepeta cataria - Catnip</i>": nepcat_NNa,
+              "<i>Podophyllum peltatum - Mayapple</i>": podpel,
+              "<i>Populus deltoides - Eastern Cottonwood <br><br> * denotes an introduced species</i>": popdel,
+
+             };
+
+             var overlays = {
+             "Tribe territories": Tribes
+
+             };
+
+             L.control.layers(basemaps, overlays, {collapsed:false}).addTo(map);
+
+
+
+
+
+        </script>
+   </body>
+</html>
